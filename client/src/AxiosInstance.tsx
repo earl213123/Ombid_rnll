@@ -21,16 +21,12 @@ AxiosInstance.interceptors.request.use((config) => {
 });
 
 AxiosInstance.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    return response;
+  },
   (error) => {
-    if (!error.response) {
-      console.error("Network Error or Server Down:", error.message);
-    } else if (error.response.status !== 422) {
-      console.error(
-        "Unexpected Error:",
-        error.response.status,
-        error.response.data
-      );
+    if (error.response.status != 422) {
+      console.error("Unexpected response error: ", error);
     }
 
     return Promise.reject(error);

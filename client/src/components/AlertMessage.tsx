@@ -25,15 +25,13 @@ const AlertMessage = ({
 
   return (
     <>
-      <div>
-        <div
-          className={`alert ${isSuccess ? "alert-success" : "alert-danger"} ${
-            isVisible ? "show" : "d-none"
-          }`}
-          role="alert"
-        >
-          {message}
-        </div>
+      <div
+        className={`alert ${isSuccess ? "alert-success" : "alert-danger"} ${
+          isVisible ? "show" : "d-none"
+        }`}
+        role="alert"
+      >
+        {message}
       </div>
     </>
   );

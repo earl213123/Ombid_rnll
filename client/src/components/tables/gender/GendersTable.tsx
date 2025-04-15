@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Genders from "../../interfaces/Gender";
-import GenderService from "../../services/GenderService";
-import ErrorHandler from "../../handler/ErrorHandler";
-import Spinner from "../Spinner";
+import { Genders } from "../../../interfaces/Genders";
+import GenderService from "../../../services/GenderService";
+import ErrorHandler from "../../../handler/ErrorHandler";
+import Spinner from "../../Spinner";
 import { Link } from "react-router-dom";
 
 interface GendersTableProps {
@@ -25,7 +25,7 @@ const GendersTable = ({ refreshGenders }: GendersTableProps) => {
           }));
         } else {
           console.error(
-            "Unexpected Status Error During Loading Genders:",
+            "Unexpected status error during loading genders: ",
             res.status
           );
         }
@@ -49,10 +49,10 @@ const GendersTable = ({ refreshGenders }: GendersTableProps) => {
     <>
       <table className="table table-hover">
         <thead>
-          <tr>
-            <th>NO.</th>
+          <tr className="align-middle">
+            <th>No.</th>
             <th>Gender</th>
-            <th>Actions</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -71,7 +71,7 @@ const GendersTable = ({ refreshGenders }: GendersTableProps) => {
                   <div className="btn-group">
                     <Link
                       to={`/gender/edit/${gender.gender_id}`}
-                      className="btn btn-primary"
+                      className="btn btn-success"
                     >
                       Edit
                     </Link>
@@ -88,7 +88,7 @@ const GendersTable = ({ refreshGenders }: GendersTableProps) => {
           ) : (
             <tr className="align-middle">
               <td className="text-center" colSpan={3}>
-                NO GENDERS FOUND
+                No Genders Found
               </td>
             </tr>
           )}

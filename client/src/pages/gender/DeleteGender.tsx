@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AlertMessage from "../../components/AlertMessage";
-import DeleteGenderForm from "../../components/forms/DeleteGenderForm";
+import DeleteGenderForm from "../../components/forms/gender/DeleteGenderForm";
 import MainLayout from "../layout/MainLayout";
 
 const DeleteGender = () => {
@@ -20,8 +20,10 @@ const DeleteGender = () => {
 
   const handleCloseAlertMessage = () => {
     setMessage("");
+    setIsSuccess(false);
     setIsVisible(false);
   };
+
   const content = (
     <>
       <AlertMessage
@@ -41,6 +43,7 @@ const DeleteGender = () => {
       </div>
     </>
   );
+
   return <MainLayout content={content} />;
 };
 

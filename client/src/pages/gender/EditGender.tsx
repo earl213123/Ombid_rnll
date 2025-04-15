@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AlertMessage from "../../components/AlertMessage";
-import EditGenderForm from "../../components/forms/EditGenderForm";
+import EditGenderForm from "../../components/forms/gender/EditGenderForm";
 import MainLayout from "../layout/MainLayout";
 
 const EditGender = () => {
@@ -20,6 +20,7 @@ const EditGender = () => {
 
   const handleCloseAlertMessage = () => {
     setMessage("");
+    setIsSuccess(false);
     setIsVisible(false);
   };
 
@@ -34,7 +35,7 @@ const EditGender = () => {
       <div className="d-flex justify-content-center">
         <div className="col-md-3">
           <EditGenderForm
-            OnGenderUpdate={(message) => {
+            onGenderUpdate={(message) => {
               handleShowAlertMessage(message, true, true);
             }}
           />
@@ -42,6 +43,7 @@ const EditGender = () => {
       </div>
     </>
   );
+
   return <MainLayout content={content} />;
 };
 

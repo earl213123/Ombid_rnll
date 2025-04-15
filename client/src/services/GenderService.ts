@@ -8,7 +8,6 @@ const GenderService = {
         throw error;
       });
   },
-
   getGender: async (genderId: number) => {
     return AxiosInstance.get(`/getGender/${genderId}`)
       .then((response) => response)
@@ -16,7 +15,6 @@ const GenderService = {
         throw error;
       });
   },
-
   storeGender: async (data: any) => {
     return AxiosInstance.post("/storeGender", data)
       .then((response) => response)
@@ -24,7 +22,6 @@ const GenderService = {
         throw error;
       });
   },
-
   updateGender: async (genderId: number, data: any) => {
     return AxiosInstance.put(`/updateGender/${genderId}`, data)
       .then((response) => response)

@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const menuItems = [
     {
+      route: "/",
       title: "Genders",
     },
     {
+      route: "/users",
       title: "Users",
     },
   ];
@@ -14,7 +16,7 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+          <a className="navbar-brand" href="#">
             RnL Demo
           </a>
           <button
@@ -32,7 +34,7 @@ const Navbar = () => {
             <ul className="navbar-nav">
               {menuItems.map((menuItem, index) => (
                 <li className="nav-item" key={index}>
-                  <Link className="nav-link" to={"#"}>
+                  <Link className="nav-link" to={menuItem.route}>
                     {menuItem.title}
                   </Link>
                 </li>

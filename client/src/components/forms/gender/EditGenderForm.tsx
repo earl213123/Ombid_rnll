@@ -1,16 +1,16 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import GenderService from "../../services/GenderService";
-import ErrorHandler from "../../handler/ErrorHandler";
-import Spinner from "../Spinner";
-import GenderFieldErrors from "../../interfaces/GenderFieldErrors";
-import SpinnerSmall from "../SpinnerSmall";
+import GenderService from "../../../services/GenderService";
+import ErrorHandler from "../../../handler/ErrorHandler";
+import Spinner from "../../Spinner";
+import { GenderFieldErrors } from "../../../interfaces/GenderFieldErrors";
+import SpinnerSmall from "../../SpinnerSmall";
 
 interface EditGenderFormProps {
-  OnGenderUpdate: (message: string) => void;
+  onGenderUpdate: (message: string) => void;
 }
 
-const EditGenderForm = ({ OnGenderUpdate }: EditGenderFormProps) => {
+const EditGenderForm = ({ onGenderUpdate }: EditGenderFormProps) => {
   const { gender_id } = useParams();
 
   const [state, setState] = useState({
@@ -45,7 +45,7 @@ const EditGenderForm = ({ OnGenderUpdate }: EditGenderFormProps) => {
           }));
         } else {
           console.error(
-            "Unexpected Status Error While Fetching Gender: ",
+            "Unexpected status error while getting gender: ",
             res.status
           );
         }
@@ -76,10 +76,11 @@ const EditGenderForm = ({ OnGenderUpdate }: EditGenderFormProps) => {
             ...prevState,
             errors: {} as GenderFieldErrors,
           }));
-          OnGenderUpdate(res.data.message);
+
+          onGenderUpdate(res.data.message);
         } else {
           console.error(
-            "Unexpected Status Error While Updating Gender: ",
+            "Unexpected status error while updating gender: ",
             res.status
           );
         }
@@ -104,10 +105,10 @@ const EditGenderForm = ({ OnGenderUpdate }: EditGenderFormProps) => {
 
   useEffect(() => {
     if (gender_id) {
-      const parseGenderId = parseInt(gender_id);
-      handleGetGender(parseGenderId);
+      const parsedGenderId = parseInt(gender_id);
+      handleGetGender(parsedGenderId);
     } else {
-      console.error("invalid gender_id: ", gender_id);
+      console.error("Invalid gender_id: ", gender_id);
     }
   }, [gender_id]);
 
@@ -121,14 +122,13 @@ const EditGenderForm = ({ OnGenderUpdate }: EditGenderFormProps) => {
         <form onSubmit={handleUpdateGender}>
           <div className="form-group">
             <div className="mb-3">
-              <label htmlFor="gender">Edit Gender</label>
+              <label htmlFor="gender">Gender</label>
               <input
                 type="text"
-                className={`form-control ${
-                  state.errors.gender ? "is-invalid" : ""
-                }`}
-                id="gender"
+                className={`form-control ${state.errors.gender ? "is-invalid" : ""
+                  }`}
                 name="gender"
+                id="gender"
                 value={state.gender}
                 onChange={handleInputChange}
               />
@@ -137,26 +137,22 @@ const EditGenderForm = ({ OnGenderUpdate }: EditGenderFormProps) => {
               )}
             </div>
             <div className="d-flex justify-content-end">
-              <td>
-                <Link to={"/"} className="btn btn-danger">
-                  Cancel
-                </Link>
-                <a href="/">
-                  <button
-                    type="submit"
-                    className="btn btn-success"
-                    disabled={state.loadingUpdate}
-                  >
-                    {state.loadingUpdate ? (
-                      <>
-                        <SpinnerSmall /> Updating...
-                      </>
-                    ) : (
-                      "Update"
-                    )}
-                  </button>
-                </a>
-              </td>
+              <Link to={"/"} className="btn btn-secondary me-1">
+                Back
+              </Link>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={state.loadingUpdate}
+              >
+                {state.loadingUpdate ? (
+                  <>
+                    <SpinnerSmall /> Updating...
+                  </>
+                ) : (
+                  "Update"
+                )}
+              </button>
             </div>
           </div>
         </form>

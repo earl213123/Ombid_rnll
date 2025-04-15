@@ -1,15 +1,14 @@
-import { FormEvent, useState } from "react";
-import { ChangeEvent } from "react";
-import GenderService from "../../services/GenderService";
-import ErrorHandler from "../../handler/ErrorHandler";
-import GenderFieldErrors from "../../interfaces/GenderFieldErrors";
-import SpinnerSmall from "../SpinnerSmall";
+import { ChangeEvent, FormEvent, useState } from "react";
+import GenderService from "../../../services/GenderService";
+import ErrorHandler from "../../../handler/ErrorHandler";
+import GenderFieldErrors from "../../../interfaces/GenderFieldErrors";
+import SpinnerSmall from "../../SpinnerSmall";
 
 interface AddGenderFormProps {
   onGenderAdded: (message: string) => void;
 }
 
-export const AddGenderForm = ({ onGenderAdded }: AddGenderFormProps) => {
+const AddGenderForm = ({ onGenderAdded }: AddGenderFormProps) => {
   const [state, setState] = useState({
     loadingStore: false,
     gender: "",
@@ -44,7 +43,7 @@ export const AddGenderForm = ({ onGenderAdded }: AddGenderFormProps) => {
           onGenderAdded(res.data.message);
         } else {
           console.error(
-            "Unexpeected Status Error During Storing gender",
+            "Unexpected status error during storing gender: ",
             res.status
           );
         }
@@ -98,7 +97,7 @@ export const AddGenderForm = ({ onGenderAdded }: AddGenderFormProps) => {
                   <SpinnerSmall /> Loading...
                 </>
               ) : (
-                "SAVE"
+                "Save"
               )}
             </button>
           </div>
@@ -107,3 +106,5 @@ export const AddGenderForm = ({ onGenderAdded }: AddGenderFormProps) => {
     </>
   );
 };
+
+export default AddGenderForm;
